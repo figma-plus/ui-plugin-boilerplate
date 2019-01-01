@@ -4,17 +4,22 @@ import resolve from 'rollup-plugin-node-resolve';
 import { uglify } from 'rollup-plugin-uglify';
 import run from 'rollup-plugin-run';
 import serve from 'rollup-plugin-serve';
+import scss from 'rollup-plugin-scss'
+
 
 const production = !process.env.ROLLUP_WATCH;
 const devServer = process.env.DEV_SERVER;
 
 const devServerOptions = {
-	open: true,
 	headers: {
     'Access-Control-Allow-Origin': '*',
 	},
 	contentBase: ['public', 'dist'],
 }
+
+const scssOptions = {
+	output: './dist/assets/figma-plugin-boilerplate.css',
+};
 
 export default [
 	// browser-friendly UMD build
@@ -32,6 +37,7 @@ export default [
 			production && uglify(), // minify, but only in production,
 			!production && !devServer && run(), // when in dev mode, run the js bundle to see output
 			devServer && serve(devServerOptions), // when in dev mode, run the js bundle to see output
+			scss(scssOptions)
     ],
 	},
 ];

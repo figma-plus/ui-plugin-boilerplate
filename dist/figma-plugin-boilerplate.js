@@ -137,8 +137,6 @@
   });
   });
 
-  /** @jsx h */
-
   var ExamplePlugin =
   /*#__PURE__*/
   function () {

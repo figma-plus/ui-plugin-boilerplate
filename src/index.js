@@ -1,6 +1,6 @@
-import h from 'vhtml';
 /** @jsx h */
-
+import h from 'vhtml';
+import './assets/figma-plugin-boilerplate.scss';
 
 export default class ExamplePlugin {
   constructor() {
