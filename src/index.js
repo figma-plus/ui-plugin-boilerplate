@@ -3,7 +3,7 @@ import "./figma-plugin-ui.scss";
 import h from "vhtml";
 import { getDomNode, createHtmlNodes } from "./utils";
 
-class ExamplePlugin {
+export default class ExamplePlugin {
   constructor() {
     this.pluginName = "Example Plugin";
 
@@ -23,8 +23,8 @@ class ExamplePlugin {
 
     const options = [this.pluginName, this.showUI, null, shortcut];
 
-    window.figmaPlugin.createPluginsMenuItem(...options);
-    window.figmaPlugin.createKeyboardShortcut(shortcut, this.showUI);
+    window.figmaPlus.createPluginsMenuItem(...options);
+    window.figmaPlus.createKeyboardShortcut(shortcut, this.showUI);
 
     // The UI follows a strict structure to utlize the CSS shipped with this boilerplate
     // But you can freely play with the css in figma-plugin-ui.scss
@@ -125,7 +125,7 @@ class ExamplePlugin {
   showUI = () => {
     // Show the plugin modal using figmaPlugin API.
 
-    window.figmaPlugin.showUI(
+    window.figmaPlus.showUI(
       this.pluginName,
       modalElement => {
         const htmlNodes = createHtmlNodes(this.UI);
@@ -146,7 +146,7 @@ class ExamplePlugin {
     console.log(event.target.id, event);
 
     if (event.target.id === "button-primary") {
-      window.figmaPlugin.hideUI(this.pluginName);
+      window.figmaPlus.hideUI(this.pluginName);
     }
   };
 }

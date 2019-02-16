@@ -1,9 +1,8 @@
 {
-  "name": "figma-plugin-boilerplate-ui",
+  "name": "figma-ui-plugin-boilerplate",
   "version": "0.0.1",
   "description": "An example plugin for Figma that utlize Figma Plugin Manager API.",
-  "repository": "https://cdes@github.com/cdes/figma-plugin-boilerplate-ui.git",
-  "manifestUrl": "https://cdes@github.io/figma-plugin-boilerplate-ui/manifest.json",
+  "repository": "https://github.com/figmaplus/ui-plugin-boilerplate",
   "author": "Ahmad Al Haddad <haddad@ah.sa>",
   "license": "MIT",
   "main": "src/index.js",
@@ -14,7 +13,7 @@
   "devDependencies": {
     "@babel/core": "^7.2.2",
     "@babel/plugin-proposal-class-properties": "^7.3.0",
-    "@babel/plugin-proposal-object-rest-spread": "^7.3.1",
+    "@babel/plugin-proposal-object-rest-spread": "^7.3.2",
     "@babel/plugin-transform-arrow-functions": "^7.2.0",
     "@babel/plugin-transform-classes": "^7.2.2",
     "@babel/plugin-transform-modules-commonjs": "^7.2.0",
@@ -26,12 +25,12 @@
     "@babel/plugin-transform-template-literals": "^7.2.0",
     "@babel/preset-env": "^7.3.1",
     "babel-core": "^7.0.0-bridge.0",
-    "babel-jest": "^23.6.0",
+    "babel-jest": "^24.1.0",
     "boxen": "^2.1.0",
     "chalk": "^2.4.2",
-    "jest": "^23.6.0",
+    "jest": "^24.1.0",
     "nodejs-fs-utils": "^1.1.2",
-    "prettier": "^1.16.1",
+    "prettier": "^1.16.4",
     "regenerator-runtime": "^0.13.1",
     "rollup": "^1.1.2",
     "rollup-plugin-babel": "^4.3.2",
@@ -41,9 +40,11 @@
     "rollup-plugin-node-resolve": "^4.0.0",
     "rollup-plugin-run": "^1.1.0",
     "rollup-plugin-sass": "^1.1.0",
-    "rollup-plugin-serve": "^1.0.0",
-    "rollup-plugin-uglify": "^6.0.1",
-    "sha.js": "^2.4.11"
+    "rollup-plugin-serve": "^1.0.1",
+    "rollup-plugin-uglify": "^6.0.2"
+  },
+  "peerDependencies": {
+    "babel-core": "6.x || ^7.0.0-bridge.0"
   },
   "scripts": {
     "build": "rollup -c",
