@@ -1,51 +1,32 @@
-<h1 align="center"> Figma Plugin Boilerplate </h1>
+<h1 align="center"> Figma UI Plugin Boilerplate </h1>
 
 <p align="center"> Kickstart your awesome Figma plugin with this boilerplate. </p>
 
 <hr/>
 
+<p align="center"> 
+<img align="center" src="https://user-images.githubusercontent.com/1207863/52892776-d20e5e80-31a6-11e9-8fd6-8414d148443a.gif" />
+ </p>
+
 <h3> Features </h3>
 
 <ul>
-  <li>Write your plugin in ES6</li>
+  <li>Plugin UI with vhtml</li>
+  <li>Figma-like styles with SASS</li>
+  <li>Basic local simulation for figmaPlus.showUI()</li>
+  <li>Modern Javascript (ES6)</li>
+  <li>Uses native Javascript events (Frontend frameworks are an overkill)</li>
   <li>Tests using Jest</li>
   <li>Transpiling using Babel and bundle using Rollup</li>
   <li>Code formatting with Prettier</li>
 </ul>
 
-<h3> Code Demo </h3>
-
-```js
-export default class ExamplePlugin {
-  constructor() {
-    this.options = [
-      "Alert File Name",
-      this.main.bind(this),
-      null,
-      { shift: true, option: true, key: "t" }
-    ];
-
-    const { figmaPlugin } = window;
-    figmaPlugin.createPluginsMenuItem(...this.options);
-
-    window.examplePlugin = this;
-  }
-
-  main() {
-    const { App, alert } = window;
-    const fileName = App.getCurrentFileName();
-
-    alert(fileName);
-  }
-}
-
-```
 
 <h3> Download & Development </h3>
 
 
 ```shell
-$ git clone https://github.com/cdes/figma-plugin-boilerplate
+$ git clone https://github.com/figma-plus/ui-plugin-boilerplate
 ```
 
 
@@ -55,7 +36,7 @@ $ yarn install
 
 
 ```shell
-$ yarn dev
+$ yarn serve
 ```
 
 
@@ -70,7 +51,7 @@ $ yarn build
 ```
 
 You'll see your bundle inside `dist` directory.
-Follow the <a href="http://figmaplugins.io/docs/publishing-a-plugin">docs instructions</a> to publish it.
+Follow the <a href="https://docs.figmaplus.com/#/developerGuide/publish">docs instructions</a> to publish it.
 
 <h3>License</h3>
 
