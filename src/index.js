@@ -124,22 +124,25 @@ export default class ExamplePlugin {
 
   showUI = () => {
     // Show the plugin modal using figmaPlugin API.
-
     window.figmaPlus.showUI(
       this.pluginName,
       modalElement => {
         const htmlNodes = createHtmlNodes(this.UI);
         modalElement.parentNode.replaceChild(htmlNodes, modalElement);
+
+        // Hookup onInteract to handle all UI events.
+        // You can also use a separate handler for each UI element..
+        // it's just plain ol javascript.
+
+        this.attachEvents();
       },
       460,
-      600
+      600,
+      0.5,
+      0.5,
+      false,
+      false
     );
-
-    // Hookup onInteract to handle all UI events.
-    // You can also use a separate handler for each UI element..
-    // it's just plain ol javascript.
-
-    this.attachEvents();
   };
 
   onInteract = event => {
