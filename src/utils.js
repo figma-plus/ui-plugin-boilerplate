@@ -10,6 +10,3 @@ export const until = conditionFunction => {
 export const getDomNode = selector => {
   return document.querySelector(selector);
 };
-
-export const createHtmlNodes = string =>
-  document.createRange().createContextualFragment(string);

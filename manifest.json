@@ -1,7 +1,7 @@
 {
 	"name": "Alert File Name",
 	"id": "figma-ui-plugin-boilerplate",
-	"version": "0.0.1",
+	"version": "0.0.2",
 	"author": "Ahmad Al Haddad",
 	"github": "https://github.com/figma-plus/ui-plugin-boilerplate",
   "description": "An example plugin for Figma that utlize Figma Plugin Manager API.",

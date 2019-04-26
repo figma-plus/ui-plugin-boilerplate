@@ -6,5 +6,5 @@ test('it has a name', () => {
 });
 
 test('it has a menu item function', () => {
-  expect(typeof instance.showUI).toBe('function');
+  expect(typeof instance.action).toBe('function');
 });

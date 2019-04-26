@@ -7,7 +7,7 @@
 .figma-plugin-ui .scrollable {
   padding: 24px;
   flex-basis: calc(100% - 66px);
-  overflow-y: scroll;
+  overflow: hidden scroll;
 }
 .figma-plugin-ui .empty {
   background-color: #fff;

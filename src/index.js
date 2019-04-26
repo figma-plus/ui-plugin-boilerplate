@@ -1,7 +1,7 @@
 /** @jsx h */
 import "./figma-plugin-ui.scss";
 import h from "vhtml";
-import { getDomNode, createHtmlNodes } from "./utils";
+import { getDomNode } from "./utils";
 
 export default class ExamplePlugin {
   constructor() {
@@ -21,15 +21,18 @@ export default class ExamplePlugin {
       }
     };
 
-    const options = [this.pluginName, this.showUI, null, shortcut];
+    const options = {
+      label: this.pluginName,
+      action: this.action,
+      shortcut
+    };
 
-    window.figmaPlus.createPluginsMenuItem(...options);
-    window.figmaPlus.createKeyboardShortcut(shortcut, this.showUI);
+    window.figmaPlus.addCommand(options);
 
     // The UI follows a strict structure to utlize the CSS shipped with this boilerplate
     // But you can freely play with the css in figma-plugin-ui.scss
 
-    this.UI = (
+    this.html = (
       <div class="figma-plugin-ui">
         <div class="scrollable">
           <h2>Section 1</h2>
@@ -100,9 +103,24 @@ export default class ExamplePlugin {
     );
   }
 
-  attachEvents = () => {
-    // No need to removeEventListeners because
-    // the hideUI removes your plugin from the DOM.
+  onInteract = event => {
+    /*
+      We're using one function to handle all UI elements
+      here just to make the example shorter.
+      We recommend using a separate function for each ui element.
+    */
+    console.log(event.target.id, event);
+
+    if (event.target.id === "button-primary") {
+      window.figmaPlus.hideUI(this.pluginName);
+    }
+  };
+
+  attachEvents = element => {
+    /*
+      No need to removeEventListeners because figmaPlus.hideUI
+      removes the plugin from the DOM.  This removes listeners too.
+    */
 
     ["#input1", "#input2", "#input3", "#input4"].map(id =>
       getDomNode(id).addEventListener("input", this.onInteract)
@@ -122,35 +140,43 @@ export default class ExamplePlugin {
     ].map(id => getDomNode(id).addEventListener("click", this.onInteract));
   };
 
-  showUI = () => {
-    // Show the plugin modal using figmaPlugin API.
-    window.figmaPlus.showUI(
-      this.pluginName,
-      modalElement => {
-        const htmlNodes = createHtmlNodes(this.UI);
-        modalElement.parentNode.replaceChild(htmlNodes, modalElement);
-
+  action = () => {
+    /*
+      Show the plugin modal using figmaPlugin API.
+      figmaPlus.showUI({
+          title,
+          html,
+          reactComponent,
+          vueComponent,
+          onMount,
+          width,
+          height,
+          positionX,
+          positionY,
+          overlay,
+          padding,
+          useFigmaStyles,
+          tabs
+      });
+    */
+    window.figmaPlus.showUI({
+      title: this.pluginName,
+      html: this.html,
+      onMount: element => {
         // Hookup onInteract to handle all UI events.
         // You can also use a separate handler for each UI element..
         // it's just plain ol javascript.
 
-        this.attachEvents();
+        this.attachEvents(element);
       },
-      460,
-      600,
-      0.5,
-      0.5,
-      false,
-      false
-    );
-  };
-
-  onInteract = event => {
-    console.log(event.target.id, event);
-
-    if (event.target.id === "button-primary") {
-      window.figmaPlus.hideUI(this.pluginName);
-    }
+      width: 460,
+      height: 600,
+      positionX: 0.5,
+      positionY: 0.5,
+      overlay: false,
+      padding: false,
+      useFigmaStyles: false
+    });
   };
 }
 

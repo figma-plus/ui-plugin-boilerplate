@@ -12,8 +12,8 @@ import { fsizeSync, rmdirsSync } from 'nodejs-fs-utils';
 import boxen from 'boxen';
 import chalk from 'chalk';
 
-const production = !process.env.ROLLUP_WATCH;
-const development = process.env.ROLLUP_WATCH;
+const PRODUCTION = !process.env.ROLLUP_WATCH;
+const DEVELOPMENT = process.env.ROLLUP_WATCH;
 const RUN = process.env.RUN;
 
 // Default options
@@ -57,7 +57,7 @@ const logger = () => {
 				}
 			}			
 
-			if (development) {
+			if (DEVELOPMENT) {
 				const devContent = [
 					chalk.green.bold('FOR PLUGIN MANAGER:'),
 					chalk.white.bold('port:   ')+chalk.white(devServerOptions.port),
@@ -67,7 +67,7 @@ const logger = () => {
 				console.log(boxen(devContent.join("\n"), boxOptions));
 			}
 
-			if (production) {
+			if (PRODUCTION) {
 				const productionContent = [
 					chalk.green.bold('PUBLISHING INFO'),
 					...filesPaths,
@@ -91,24 +91,6 @@ const distCleaner = () => {
 }
 
 export default [
-	// Simulated Panel & Figma API for local development purpose only (Away from Figma)
-	{
-		input: 'lib/figma-plugin-panel.js',
-		output: {
-			name: 'figma-plugin-panel',
-			file: 'public/figma-plugin-panel.js',
-			format: 'umd'
-		},
-		plugins: [
-			resolve(),
-      babel({runtimeHelpers: true}),
-      cjs(),
-			uglify(),
-			sass({
-				output: `./public/figma-plugin-panel.css`,
-			}),
-		],
-	},
 	// browser-friendly UMD build
 	{
 		input: 'src/index.js',
@@ -122,9 +104,9 @@ export default [
 			resolve(),
       babel({runtimeHelpers: true,}),
       cjs(),
-			development && RUN && run(), // Dev mode: run the bundle to see output in console/terminal
-			development && serve(devServerOptions), // Dev Serve mode: serve  bundle
-			production && uglify(), // Production: uglify bundle,
+			DEVELOPMENT && RUN && run(), // Dev mode: run the bundle to see output in console/terminal
+			DEVELOPMENT && serve(devServerOptions), // Dev Serve mode: serve  bundle
+			PRODUCTION && uglify(), // Production: uglify bundle,
 			sass({
 				output: `./dist/${pkg.name}.css`,
 			}),
